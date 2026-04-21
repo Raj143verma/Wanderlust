@@ -49,7 +49,7 @@ const store = MongoStore.create({
     },
 });
 
-store.on("error", () => {
+store.on("error", (err) => {
     console.log("Error in mongo store", err);
 });
 
@@ -66,9 +66,9 @@ const sessionOptions = {
         },
 }
 
-// app.get("/",(req,res)=> {
-//     res.send("Hi, i am root ");
-// });
+ app.get("/",(req,res)=> {
+    res.redirect("/listings");
+ });
 
 
 app.use(session(sessionOptions));
@@ -88,14 +88,7 @@ app.use((req, res, next) => {
 });
 
 
-// app.get("/demoUser", async (req, res) => {
-//     let fakeuser = new User({ 
-//         email: "fake@example.com",
-//          username: "fakeuser"
-//          });
-//    const registeredUser = await User.register(fakeuser, "password123");
-//    res.send(registeredUser);
-// });
+
 
 app.use("/listings", listingRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
