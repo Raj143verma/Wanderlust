@@ -8,7 +8,26 @@ const multer  = require('multer');
 const { storage } = require("../cloudConfig.js");
 const upload = multer({ storage: storage });  
 
-
+router.get('/api/listings', async (req, res) => {
+  try {
+    const { category } = req.query;
+    
+    let filter = {};
+    if (category && category !== 'all') {
+      filter.category = category;
+    }
+    
+    const listings = await Listing.find(filter).populate('owner');
+    
+    res.json({
+      success: true,
+      count: listings.length,
+      data: listings
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
 
 router
 .route("/")
@@ -68,8 +87,5 @@ router
 
    //Edit Route
    router.get("/:id/edit", isLoggedIn,isOwner, wrapAsync(listingController.renderEditForm));
-   
-  
-   
 
 module.exports = router;

@@ -91,6 +91,11 @@ app.use((req, res, next) => {
 
 
 app.use("/listings", listingRoutes);
+// Direct mapping to properly handle fetch from JS
+app.get("/api/listings", (req, res, next) => {
+    req.url = "/listings/api/listings";
+    app.handle(req, res, next);
+});
 app.use("/listings/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 
