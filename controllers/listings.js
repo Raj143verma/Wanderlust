@@ -1,4 +1,5 @@
 const Listing = require("../models/listing.js");
+const Booking = require("../models/booking.js");
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapToken = process.env.MAPBOX_TOKEN;
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
@@ -21,8 +22,15 @@ module.exports.showListing = async (req,res) =>{
         req.flash("error", "Listing you requested for does not exist!");
         return res.redirect("/listings");
     }
+    
+    let hasBooked = false;
+    if (req.user) {
+        const booking = await Booking.findOne({ user: req.user._id, listing: listing._id, bookingStatus: "confirmed" });
+        if (booking) hasBooked = true;
+    }
+    
     console.log(listing);
-    res.render("listings/show.ejs",{listing});
+    res.render("listings/show.ejs",{listing, hasBooked});
    };
 
    module.exports.createListing = async (req, res) => {
