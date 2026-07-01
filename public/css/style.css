@@ -27,11 +27,36 @@ footer {
     color: #222222 !important;
 }
 
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+    padding: 0.5rem 0;
+  }
+
+  .navbar .navbar-toggler {
+    margin-left: auto;
+  }
+
+  .navbar .navbar-collapse {
+    padding-top: 0.5rem;
+  }
+
+  .navbar .navbar-nav.ms-auto {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .navbar .navbar-nav .nav-link {
+    padding: 0.45rem 0.75rem;
+  }
+}
+
 /* Footer */
 .f-info-links a {
     text-decoration: none;
     color:#222222;
-}
+} 
 
 .f-info-links a:hover {
     text-decoration: underline;

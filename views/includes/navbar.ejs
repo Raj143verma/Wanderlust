@@ -3,27 +3,44 @@
   background-color: #ff385c;
   color: white;
   border-radius: 25px;
-  padding: 0 1rem 0 1rem;
-
+  padding: 0 1rem;
 }
 .search-btn:hover {
   background-color: #ff385c;
   color: white;
-   
 }
 .search-btn i {
-cursor: pointer;
+  cursor: pointer;
   display: inline;
   margin-right: 0.5rem;
-
 }
 .search-input {
   border-radius: 25px;
   border: 1px solid #ccc;
-  padding: 0.5rem 3rem 0.5rem 3rem;
+  padding: 0.5rem 3rem;
   width: 250px;
+  max-width: 100%;
+  box-sizing: border-box;
   font-size: 1rem;
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .navbar form.d-flex {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .navbar .search-input {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .navbar .search-btn {
+    width: 100%;
+    padding: 0.65rem 1rem;
+  }
 }
 </style>
 
